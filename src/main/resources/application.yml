@@ -1,0 +1,28 @@
+# Basic Spring Boot Config for Oracle and hibernate config
+spring:
+    datasource:
+        driver-class-name: oracle.jdbc.OracleDriver
+        url: jdbc:oracle:thin:@10.30.49.76:1521/ORADB
+        username: basis
+        password: erpbasis0
+#        url: jdbc:oracle:thin:@192.168.147.133:1521/xe
+#        username: system
+#        password: oracle
+    jpa:
+        database-platform: org.hibernate.dialect.Oracle10gDialect
+        show-sql: true
+# SFTP Info
+sftp:
+    username: itmuser
+    passwd: itmuser
+    logfiles:
+        10.30.41.80: /oracle/admin/ZHAP5_DOMAIN/aserver/ZHAP5_DOMAIN/servers/AdminServer/logs/ZHAP5_DOMAI{}.log
+        10.30.41.81: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv00{}/logs/ZHAP5_Srv00{}.log
+        10.30.41.82: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv01{}/logs/ZHAP5_Srv01{}.log
+        10.30.41.79: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv02{}/logs/ZHAP5_Srv02{}.log
+        10.30.41.78: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv03{}/logs/ZHAP5_Srv03{}.log
+        10.30.41.69: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv04{}/logs/ZHAP5_Srv04{}.log
+        10.30.41.68: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv05{}/logs/ZHAP5_Srv05{}.log
+        10.30.41.67: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv06{}/logs/ZHAP5_Srv06{}.log
+        10.30.41.66: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv07{}/logs/ZHAP5_Srv07{}.log
+        10.30.41.101: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv08{}/logs/ZHAP5_Srv08{}.log
