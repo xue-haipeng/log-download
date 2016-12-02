@@ -25,6 +25,15 @@ public class HomeController {
         return "home";
     }
 
+    @RequestMapping("/zzkf/zhap5")
+    public String zhap5Page() { return "zhap5"; }
+
+    @RequestMapping("/jcpt/xoaps")
+    public String xoapsPage() { return "xoaps"; }
+
+    @RequestMapping("/jcpt/xmapt")
+    public String xmaptPage() { return "xmapt"; }
+
     @Autowired
     SftpInvokeService invokeService;
 
