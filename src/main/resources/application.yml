@@ -26,3 +26,36 @@ sftp:
         10.30.41.67: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv06{}/logs/ZHAP5_Srv06{}.log
         10.30.41.66: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv07{}/logs/ZHAP5_Srv07{}.log
         10.30.41.101: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv08{}/logs/ZHAP5_Srv08{}.log
+
+# Ssh Configuration
+ssh:
+    ip:
+        - 10.30.148.121
+        - 10.30.150.166
+        - 10.30.150.168
+        - 10.30.150.169
+        - 10.30.150.181
+        - 10.30.150.251
+        - 10.30.47.16
+        - 10.30.47.17
+        - 10.30.47.31
+        - 10.30.47.32
+        - 10.30.49.69
+        - 10.30.49.70
+        - 11.11.4.54
+        - 11.11.4.59
+        - 11.11.49.131
+        - 11.11.49.132
+        - 11.11.49.133
+        - 11.11.49.134
+        - 11.11.8.34
+        - 11.11.8.56
+        - 11.11.8.57
+        - 11.11.8.58
+        - 11.11.8.59
+    username: itmuser
+    passwd: itmuser
+    cmd:
+        - df -h
+        - ifconfig
+        - pwd
