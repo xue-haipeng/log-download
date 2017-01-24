@@ -9,7 +9,10 @@ import javax.management.remote.JMXServiceURL;
 import javax.naming.Context;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.Arrays;
 import java.util.Hashtable;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Xue on 01/22/17.
@@ -52,22 +55,23 @@ public class JvmRuntimeCheck {
 
     public void printNameAndState() throws Exception {
         ObjectName jvmRuntime = getJvmRuntime();
-        System.out.println("got jvm runtimes");
         String name = (String) connection.getAttribute(jvmRuntime,"Name");
         long heapSizeCurrent = (long) connection.getAttribute(jvmRuntime, "HeapSizeCurrent");
         long heapFreeCurrent = (long) connection.getAttribute(jvmRuntime, "HeapFreeCurrent");
         int heapFreePercent = (int) connection.getAttribute(jvmRuntime, "HeapFreePercent");
         String threadStackDump = (String) connection.getAttribute(jvmRuntime, "ThreadStackDump");
         String[] stringArray = threadStackDump.split("\\r?\\n\\n");
+        List<String> threads = Arrays.asList(stringArray);
+
+        System.out.println("***********************");
+        List<String> stuckThread = threads.stream().filter(s -> s.contains("[STUCK]")).map(s -> s.concat(System.getProperty("line.separator"))).collect(Collectors.toList());
+        stuckThread.forEach(System.out::println);
+
         System.out.println("Server name: " + name + ". HeapSizeCurrent: " + heapSizeCurrent/1024/1024 + "MB, HeapFreeCurrent: "
                 + heapFreeCurrent/1024/1024 + "MB, HeapFreePercent: " + heapFreePercent + "%");
 //        System.out.println("ThreadStackDump: " + threadStackDump);
         System.out.println("+++++++++++++++++++++++++" + System.getProperty("line.separator"));
         System.out.println(stringArray.length);
-        System.out.println("+++++++++++++++++++++++++" + System.getProperty("line.separator"));
-        System.out.println(stringArray[100]);
-        System.out.println("+++++++++++++++++++++++++");
-        System.out.println(stringArray[101]);
 
     }
 
