@@ -3,6 +3,9 @@ package com.example;
 /**
  * Created by Xue on 01/22/17.
  */
+
+import weblogic.health.HealthState;
+
 import javax.management.MBeanServerConnection;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
@@ -11,7 +14,6 @@ import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 import javax.naming.Context;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.Hashtable;
 public class MonitorServlets {
     private static MBeanServerConnection connection;
@@ -30,21 +32,17 @@ public class MonitorServlets {
     /*
     * Initialize connection to the Domain Runtime MBean Server
     */
-    public static void initConnection(String hostname, String portString,
-                                      String username, String password) throws IOException,
-            MalformedURLException {
+    public static void initConnection(String hostname, String portString, String username, String password) throws IOException {
         String protocol = "t3";
         Integer portInteger = Integer.valueOf(portString);
         int port = portInteger.intValue();
         String jndiroot = "/jndi/";
         String mserver = "weblogic.management.mbeanservers.domainruntime";
-        JMXServiceURL serviceURL = new JMXServiceURL(protocol, hostname,
-                port, jndiroot + mserver);
+        JMXServiceURL serviceURL = new JMXServiceURL(protocol, hostname, port,jndiroot + mserver);
         Hashtable h = new Hashtable();
         h.put(Context.SECURITY_PRINCIPAL, username);
         h.put(Context.SECURITY_CREDENTIALS, password);
-        h.put(JMXConnectorFactory.PROTOCOL_PROVIDER_PACKAGES,
-                "weblogic.management.remote");
+        h.put(JMXConnectorFactory.PROTOCOL_PROVIDER_PACKAGES, "weblogic.management.remote");
         connector = JMXConnectorFactory.connect(serviceURL, h);
         connection = connector.getMBeanServerConnection();
     }
@@ -52,8 +50,7 @@ public class MonitorServlets {
     * Get an array of ServerRuntimeMBeans
     */
     public static ObjectName[] getServerRuntimes() throws Exception {
-        return (ObjectName[]) connection.getAttribute(service,
-                "ServerRuntimes");
+        return (ObjectName[]) connection.getAttribute(service,"ServerRuntimes");
     }
     /*
     * Get an array of WebApplicationComponentRuntimeMBeans
@@ -62,48 +59,30 @@ public class MonitorServlets {
         ObjectName[] serverRT = getServerRuntimes();
         int length = (int) serverRT.length;
         for (int i = 0; i < length; i++) {
-            ObjectName[] appRT =
-                    (ObjectName[]) connection.getAttribute(serverRT[i],
-                            "ApplicationRuntimes");
-            int appLength = (int) appRT.length;
-            for (int x = 0; x < appLength; x++) {
-                System.out.println("Application name: " +
-                        (String)connection.getAttribute(appRT[x], "Name"));
-                ObjectName[] compRT =
-                        (ObjectName[]) connection.getAttribute(appRT[x],
-                                "ComponentRuntimes");
-                int compLength = (int) compRT.length;
-                for (int y = 0; y < compLength; y++) {
-                    System.out.println("  Component name: " +
-                            (String)connection.getAttribute(compRT[y], "Name"));
-                    String componentType =
-                            (String) connection.getAttribute(compRT[y], "Type");
-                    System.out.println(componentType.toString());
-                    if (componentType.toString().equals("WebAppComponentRuntime")){
-                        ObjectName[] servletRTs = (ObjectName[])
-                                connection.getAttribute(compRT[y], "Servlets");
-                        int servletLength = (int) servletRTs.length;
-                        for (int z = 0; z < servletLength; z++) {
-                            System.out.println("    Servlet name: " +
-                                    (String)connection.getAttribute(servletRTs[z],
-                                            "Name"));
-                            System.out.println("       Servlet context path: " +
-                                    (String)connection.getAttribute(servletRTs[z],
-                                            "ContextPath"));
-                            System.out.println("       Invocation Total Count : " +
-                                    (Object)connection.getAttribute(servletRTs[z],
-                                            "InvocationTotalCount"));
-                        }
-                    }
-                }
+            ObjectName[] appRT = (ObjectName[]) connection.getAttribute(serverRT[i],"ApplicationRuntimes");
+            System.out.println("Application name: " + (String)connection.getAttribute(appRT[i],"Name"));
+            HealthState healthState = (HealthState) connection.getAttribute(appRT[i],"HealthState");
+            System.out.println(HealthState.mapToString(healthState.getState()));
+            System.out.println(connection.getAttribute(appRT[i],"ActiveVersionState"));
+
+            ObjectName[] compRT = (ObjectName[]) connection.getAttribute(appRT[i],"ComponentRuntimes");
+            int compLength = (int) compRT.length;
+            for (int y = 0; y < compLength; y++) {
+                String componentType = (String) connection.getAttribute(compRT[y],"Type");
+                System.out.println(connection.getAttribute(compRT[y],"DeploymentState"));
+
+                System.out.println("OpenSessionsCurrentCount: " + connection.getAttribute(compRT[y],"OpenSessionsCurrentCount"));
+
+                connection.getAttribute(compRT[y],"DeploymentState");
+                System.out.println(componentType);
             }
         }
     }
     public static void main(String[] args) throws Exception {
-        String hostname = "10.30.41.80";
+        String hostname = "192.168.147.133";
         String portString = "7001";
-        String username = "xuehaipeng";
-        String password = "xue112486";
+        String username = "weblogic";
+        String password = "welcome1";
         MonitorServlets s = new MonitorServlets();
         initConnection(hostname, portString, username, password);
         s.getServletData();

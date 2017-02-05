@@ -2,15 +2,13 @@ package com.example;
 
 import weblogic.health.HealthState;
 
-import javax.management.MBeanServerConnection;
-import javax.management.MalformedObjectNameException;
-import javax.management.ObjectName;
+import javax.management.*;
 import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 import javax.naming.Context;
 import java.io.IOException;
-import java.net.MalformedURLException;
+import java.util.Arrays;
 import java.util.Hashtable;
 
 /**
@@ -32,7 +30,7 @@ public class ServerRuntimeCheck {
     }
 
     public static void initConnection(String hostname, String portString,
-                                      String username, String password) throws IOException, MalformedURLException {
+                                      String username, String password) throws IOException {
         String protocol = "t3";
         Integer portInteger = Integer.valueOf(portString);
         int port = portInteger.intValue();
@@ -50,8 +48,13 @@ public class ServerRuntimeCheck {
     }
 
     public static ObjectName getServerRuntime() throws Exception {
-        return (ObjectName) connection.getAttribute(service,
-                "ServerRuntime");
+        return (ObjectName) connection.getAttribute(service, "ServerRuntime");
+    }
+
+    // Get ApplicationRuntimeMBeans
+    public static ObjectName[] getApplicationRuntime() throws Exception {
+        ObjectName serverrt = (ObjectName) connection.getAttribute(service, "ServerRuntime");
+        return  (ObjectName[]) connection.getAttribute(serverrt, "ApplicationRuntimes");
     }
 
     public void printNameAndState() throws Exception {
@@ -62,19 +65,75 @@ public class ServerRuntimeCheck {
         HealthState healthState = (HealthState) connection.getAttribute(serverRT, "HealthState");
         int stateCode = healthState.getState();
         String health = HealthState.mapToString(stateCode);
-        System.out.println("Server name: " + name + ".   Server state: " + state + ", Server Health: " + health);
+        System.out.println("Server Name: " + name + ". Server State: " + state + ", Server Health: " + health);
+        System.out.println();
+    }
+
+    public void printAppState() throws Exception {
+        ObjectName[] appRT = getApplicationRuntime();
+        Arrays.stream(appRT).forEach(objectName -> {
+            try {
+                System.out.println("Application name: " + (String)connection.getAttribute(objectName,"Name"));
+
+                HealthState healthState = (HealthState) connection.getAttribute(objectName,"HealthState");
+                System.out.println("HealthState: " + HealthState.mapToString(healthState.getState()));
+
+                int stateCode = (int) connection.getAttribute(objectName,"ActiveVersionState");
+                String activeVersionState;
+                switch (stateCode) {
+                    case 0: activeVersionState = "UNPREPARED"; break;
+                    case 1: activeVersionState = "PREPARED"; break;
+                    case 2: activeVersionState = "ACTIVATED"; break;
+                    case 3: activeVersionState = "NEW"; break;
+                    default: activeVersionState = "N/A"; break;
+                }
+                System.out.println("ActiveVersionState: " + activeVersionState);
+                ObjectName[] compRT = (ObjectName[]) connection.getAttribute(objectName,"ComponentRuntimes");
+                Arrays.stream(compRT).forEach(comp -> {
+
+                    try {
+                        System.out.println("Component Type: " + connection.getAttribute(comp,"Type"));
+                        if ("WebAppComponentRuntime".equals(connection.getAttribute(comp,"Type"))) {
+                            System.out.println("OpenSessionsCurrentCount: " + connection.getAttribute(comp,"OpenSessionsCurrentCount"));
+                        }
+                    } catch (MBeanException e) {
+                        e.printStackTrace();
+                    } catch (AttributeNotFoundException e) {
+                        System.out.println("___________");
+//                        e.printStackTrace();
+                    } catch (InstanceNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (ReflectionException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                System.out.println();
+            } catch (MBeanException e) {
+                e.printStackTrace();
+            } catch (AttributeNotFoundException e) {
+                e.printStackTrace();
+            } catch (InstanceNotFoundException e) {
+                e.printStackTrace();
+            } catch (ReflectionException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public static void main(String[] args) throws Exception {
-//        String hostname = "10.30.41.80";
-        String hostname = "10.30.41.79";
-        String portString = "8001";
-        String username = "xuehaipeng";
-        String password = "xue112486";
+        String hostname = "192.168.147.133";
+        String portString = "7001";
+        String username = "weblogic";
+        String password = "welcome1";
 
         ServerRuntimeCheck s = new ServerRuntimeCheck();
         initConnection(hostname, portString, username, password);
         s.printNameAndState();
+        s.printAppState();
         connector.close();
     }
 }
