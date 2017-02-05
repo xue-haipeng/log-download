@@ -58,5 +58,6 @@ public class WlsJmxMonitorService {
                 e.printStackTrace();
             }
         });
+        return list;
     }
 }
