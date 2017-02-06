@@ -74,8 +74,10 @@ public class WlsJmxMonitorUtils {
                 logger.info("appName: {}, appHealthState: {}, appActiveState: {}", appName, appHealthState, appActiveState);
 
                 ObjectName[] compRT = (ObjectName[]) connection.getAttribute(app,"ComponentRuntimes");
-                if ("WebAppComponentRuntime".equals(connection.getAttribute(compRT[0],"Type"))) {
-                    int openSessionsCurrentCount = (int) connection.getAttribute(compRT[0],"OpenSessionsCurrentCount");
+                System.out.println(" ********* " + compRT.length + "   compRT[0]: " + connection.getAttribute(compRT[0],"Type")
+                        + " , compRT[1]: " + connection.getAttribute(compRT[1],"Type"));
+                if ("WebAppComponentRuntime".equals(connection.getAttribute(compRT[1],"Type"))) {
+                    int openSessionsCurrentCount = (int) connection.getAttribute(compRT[1],"OpenSessionsCurrentCount");
                     String openSessions = Integer.toString(openSessionsCurrentCount);
                     map.put("openSessions", openSessions);
                     logger.info("openSessions: {}", openSessions);
