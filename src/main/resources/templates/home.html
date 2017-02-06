@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>日志下载工具</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.3.3.0.css}" />
@@ -11,8 +11,8 @@
             padding: 8px;
             text-align: center;
         }
-        #zzkf {
-            padding-left: 12%;
+        #title {
+            padding-top: 2%;
         }
         .button-small {
             font-size: 13px;
@@ -22,7 +22,7 @@
         }
         h2 {
             text-align: center;
-            padding-bottom: 20px;
+            padding-bottom: 15px;
         }
         #zhap5 {
             padding-top: 20px;
@@ -31,21 +31,21 @@
     </style>
 </head>
 <body>
-<div id="zzkf">
-    <h2 class="col-sm-11 col-md-11 col-lg-11">WebLogic日志下载工具<em style="color: #00BFFF">Beta</em></h2>
+<div id="title" class="row col-sm-12 col-md-12 col-lg-12">
+    <h2>WebLogic日志下载工具<sup><em class="badge" style="background-color: #00BFFF;">Beta</em></sup></h2>
 </div>
 
-<div>
+<div class="row col-sm-12 col-md-12 col-lg-12" style="text-align: center">
 
-    <a href="/zzkf/zhap5">人力资源自主开发</a>
-    <a href="/jcpt/xoaps">OSB上市</a>
-    <a href="/jcpt/xmapt">OSB监控平台</a>
+    <h3 style="color: #084a84"><a href="/zzkf/zhap5">人力资源自主开发</a></h3>
+    <h3 style="color: #084a84"><a href="/jcpt/xoaps">OSB上市</a></h3>
+    <h3 style="color: #084a84"><a href="/jcpt/xmapt">OSB监控平台</a></h3>
 
 </div>
 
 <script type="text/javascript" th:src="@{/js/jquery.min.1.11.2.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap.min.3.3.0.js}"></script>
-<script type="text/javascript" th:src="@{/js/highcharts.js}"></script>
-<script type="text/javascript" th:src="@{/js/hr_cpuinfo_line.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/highcharts.js}"></script>
+<script type="text/javascript" th:src="@{/js/hr_cpuinfo_line.js}"></script>-->
 
 </body></html>

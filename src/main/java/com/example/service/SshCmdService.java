@@ -1,6 +1,8 @@
 package com.example.service;
 
 import com.example.utils.JschSshUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -12,18 +14,19 @@ import java.util.List;
 @Component
 @ConfigurationProperties(prefix = "ssh")
 public class SshCmdService {
-    private String ip;
+    private static final Logger logger = LoggerFactory.getLogger(SshCmdService.class);
+    private List<String> ips;
     private String username;
     private String passwd;
     private List<String> cmd;
     public String out = null;
 
-    public String getIp() {
-        return ip;
+    public List<String> getIp() {
+        return ips;
     }
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void setIp(List<String> ips) {
+        this.ips = ips;
     }
 
     public String getUsername() {
@@ -51,12 +54,15 @@ public class SshCmdService {
     }
 
     public void sshService() {
-        try {
-            JschSshUtil.sshConn(ip, username, passwd, cmd);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        out = JschSshUtil.out;
-        JschSshUtil.sshDisconn();
+        ips.forEach(ip -> {
+            try {
+                JschSshUtil.sshConn(ip, username, passwd, cmd);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            out = JschSshUtil.out;
+            logger.info(out);
+            JschSshUtil.sshDisconn();
+        });
     }
 }

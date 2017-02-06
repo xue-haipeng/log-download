@@ -54,32 +54,37 @@ public class WlsJmxMonitorUtils {
         ObjectName[] appRT = (ObjectName[]) connection.getAttribute(serverRT,"ApplicationRuntimes");
         Optional<ObjectName> optAppRT = Arrays.stream(appRT).filter(app -> {
             try {
-                return "jspSimpleTagEar".equals((String) connection.getAttribute(app,"Name"));
+                return "CurrentApps".equals((String) connection.getAttribute(app,"Name"));
             } catch (MBeanException | AttributeNotFoundException | InstanceNotFoundException | ReflectionException | IOException e) {
                 logger.error(e.getMessage());
-                e.printStackTrace();
+                e.getCause();
             }
             return false;
         }).findAny();
         optAppRT.ifPresent(app -> {
             try {
-                map.put("appName", (String)connection.getAttribute(app,"Name"));
+                String appName = (String)connection.getAttribute(app,"Name");
+                map.put("appName", appName);
                 HealthState hs = (HealthState) connection.getAttribute(app,"HealthState");
-                map.put("appHealthState", HealthState.mapToString(hs.getState()));
+                String appHealthState = HealthState.mapToString(hs.getState());
+                map.put("appHealthState", appHealthState);
                 int sc = (int) connection.getAttribute(app,"ActiveVersionState");
-                map.put("appActiveState", activeStateMapToString(sc));
+                String appActiveState = activeStateMapToString(sc);
+                map.put("appActiveState", appActiveState);
+                logger.info("appName: {}, appHealthState: {}, appActiveState: {}", appName, appHealthState, appActiveState);
 
                 ObjectName[] compRT = (ObjectName[]) connection.getAttribute(app,"ComponentRuntimes");
                 if ("WebAppComponentRuntime".equals(connection.getAttribute(compRT[0],"Type"))) {
                     int openSessionsCurrentCount = (int) connection.getAttribute(compRT[0],"OpenSessionsCurrentCount");
-                    map.put("openSessions", Integer.toString(openSessionsCurrentCount));
+                    String openSessions = Integer.toString(openSessionsCurrentCount);
+                    map.put("openSessions", openSessions);
+                    logger.info("openSessions: {}", openSessions);
                 }
             } catch (MBeanException | AttributeNotFoundException | InstanceNotFoundException | ReflectionException | IOException e) {
                 logger.error(e.getMessage());
                 e.printStackTrace();
             }
         });
-
 
         return map;
     }

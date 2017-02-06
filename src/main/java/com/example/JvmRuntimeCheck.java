@@ -11,10 +11,10 @@ public class JvmRuntimeCheck {
 
     public static void main(String[] args) throws Exception {
 //        String hostname = "10.30.41.80";
-        String hostname = "192.168.147.133";
-        String portString = "7001";
+        String hostname = "10.30.41.101";
+        String portString = "8002";
         String username = "weblogic";
-        String password = "welcome1";
+        String password = "xfvenc&7";
 
         Map<String, String> map = WlsJmxMonitorUtils.serverStatePolling(hostname, portString, username, password);
         map.forEach((k, v) -> System.out.println(k + " : " + v));

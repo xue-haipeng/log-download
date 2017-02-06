@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.service.SftpInvokeService;
+import com.example.service.WlsJmxMonitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
@@ -11,8 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Xue on 11/29/16.
@@ -27,6 +31,15 @@ public class HomeController {
 
     @RequestMapping("/zzkf/zhap5")
     public String zhap5Page() { return "zhap5"; }
+
+    @Autowired
+    WlsJmxMonitorService service;
+
+    @RequestMapping("/zzkf/zhap5_data")
+    @ResponseBody
+    public List<Map<String, String>> pollWlsJmxState() {
+        return service.pollingWlsVieJmx();
+    }
 
     @RequestMapping("/jcpt/xoaps")
     public String xoapsPage() { return "xoaps"; }
