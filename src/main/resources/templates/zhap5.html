@@ -4,6 +4,7 @@
     <title>人力资源自主开发系统日志下载工具</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.3.3.0.css}" />
     <link rel="stylesheet" th:href="@{/css/buttons.css}" />
+    <link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}" />
 
     <style>
         div {
@@ -28,50 +29,89 @@
             padding-top: 20px;
             text-align: center;
         }
+        .modal-dialog {
+            width: 1200px;
+            margin: 30px auto;
+        }
     </style>
 </head>
 <body>
-<div id="zzkf">
-    <h2 class="col-sm-11 col-md-11 col-lg-11">HR自主开发系统日志下载工具</h2>
-    <div class="row col-sm-11 col-md-11 col-lg-11">
-        <a href="/download/10.30.41.80/ZHAP5_DOMAIN" class="button button-small button-raised button-primary button-pill">ZHAP5_DOMAIN.log</a>
-        <a href="/download/10.30.41.81/ZHAP5_Srv001" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv001.log</a>
-        <a href="/download/10.30.41.81/ZHAP5_Srv002" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv002.log</a>
-        <a href="/download/10.30.41.82/ZHAP5_Srv011" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv011.log</a>
+<!-- MServer Polling Modal -->
+<div class="modal fade" id="mserverModal" tabindex="-1" role="dialog" aria-labelledby="mserverModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #ecebeb;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                </button>
+                <h3 class="modal-title" style="text-align: left">各Server状态</h3>
+            </div>
+            <div class="modal-body">
+                <div th:replace="zhap5/modalPage :: mserver_fragment" style="text-align: left;"></div>
+            </div>
+            <div class="modal-footer" style="background-color: #ecebeb;">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
     </div>
-    <div class="row col-sm-11 col-md-11 col-lg-11">
-        <a href="/download/10.30.41.82/ZHAP5_Srv012" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv012.log</a>
-        <a href="/download/10.30.41.79/ZHAP5_Srv021" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv021.log</a>
-        <a href="/download/10.30.41.79/ZHAP5_Srv022" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv022.log</a>
-        <a href="/download/10.30.41.78/ZHAP5_Srv031" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv031.log</a>
+</div>
+
+<div id="zzkf" class="row col-sm-12 col-md-12 col-lg-12">
+    <h2 class="col-sm-12 col-md-12 col-lg-12">HR自主开发系统日志下载工具</h2>
+</div>
+<div class="row col-sm-12 col-md-12 col-lg-12">
+    <div class="col-sm-9 col-md-9 col-lg-9">
+        <div>
+            <a href="/download/10.30.41.80/ZHAP5_DOMAIN" class="button button-small button-raised button-primary button-pill">ZHAP5_DOMAIN.log</a>
+            <a href="/download/10.30.41.81/ZHAP5_Srv001" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv001.log</a>
+            <a href="/download/10.30.41.81/ZHAP5_Srv002" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv002.log</a>
+            <a href="/download/10.30.41.82/ZHAP5_Srv011" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv011.log</a>
+        </div>
+        <div>
+            <a href="/download/10.30.41.82/ZHAP5_Srv012" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv012.log</a>
+            <a href="/download/10.30.41.79/ZHAP5_Srv021" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv021.log</a>
+            <a href="/download/10.30.41.79/ZHAP5_Srv022" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv022.log</a>
+            <a href="/download/10.30.41.78/ZHAP5_Srv031" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv031.log</a>
+        </div>
+        <div>
+            <a href="/download/10.30.41.78/ZHAP5_Srv032" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv032.log</a>
+            <a href="/download/10.30.41.69/ZHAP5_Srv041" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv041.log</a>
+            <a href="/download/10.30.41.69/ZHAP5_Srv042" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv042.log</a>
+            <a href="/download/10.30.41.68/ZHAP5_Srv051" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv051.log</a>
+        </div>
+        <div>
+            <a href="/download/10.30.41.68/ZHAP5_Srv052" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv052.log</a>
+            <a href="/download/10.30.41.67/ZHAP5_Srv061" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv061.log</a>
+            <a href="/download/10.30.41.67/ZHAP5_Srv062" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv062.log</a>
+            <a href="/download/10.30.41.66/ZHAP5_Srv071" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv071.log</a>
+        </div>
+        <div>
+            <a href="/download/10.30.41.66/ZHAP5_Srv072" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv072.log</a>
+            <a href="/download/10.30.41.101/ZHAP5_Srv081" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv081.log</a>
+            <a href="/download/10.30.41.101/ZHAP5_Srv082" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv082.log</a>
+        </div>
     </div>
-    <div class="row col-sm-11 col-md-11 col-lg-11">
-        <a href="/download/10.30.41.78/ZHAP5_Srv032" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv032.log</a>
-        <a href="/download/10.30.41.69/ZHAP5_Srv041" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv041.log</a>
-        <a href="/download/10.30.41.69/ZHAP5_Srv042" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv042.log</a>
-        <a href="/download/10.30.41.68/ZHAP5_Srv051" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv051.log</a>
-    </div>
-    <div class="row col-sm-11 col-md-11 col-lg-11">
-        <a href="/download/10.30.41.68/ZHAP5_Srv052" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv052.log</a>
-        <a href="/download/10.30.41.67/ZHAP5_Srv061" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv061.log</a>
-        <a href="/download/10.30.41.67/ZHAP5_Srv062" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv062.log</a>
-        <a href="/download/10.30.41.66/ZHAP5_Srv071" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv071.log</a>
-    </div>
-    <div class="row col-sm-11 col-md-11 col-lg-11">
-        <a href="/download/10.30.41.66/ZHAP5_Srv072" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv072.log</a>
-        <a href="/download/10.30.41.101/ZHAP5_Srv081" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv081.log</a>
-        <a href="/download/10.30.41.101/ZHAP5_Srv082" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv082.log</a>
+    <div class="col-sm-3 col-md-3 col-lg-3" style="padding-top: 4%">
+        <div style="padding: 2%;">
+            <button id="aserver" type="button" class="btn btn-success" aria-label="Left Align">
+                <span class="glyphicon glyphicon-play" aria-hidden="true"><span style="font-family: 'Microsoft YaHei UI', Arial;">通过AdminServer巡检</span></span>
+            </button>
+        </div>
+        <div style="padding: 2%;">
+            <button id="mserver" type="button" class="btn btn-warning" aria-label="Left Align" data-toggle="modal" data-target="#mserverModal">
+                <span class="glyphicon glyphicon-play" aria-hidden="true"><span style="font-family: 'Microsoft YaHei UI', Arial;">对每个Server单独巡检</span></span>
+            </button>
+        </div>
     </div>
 </div>
 <div>
-
     <div id="zhap5" class="row col-sm-12 col-md-12 col-lg-12"></div>
-
 </div>
 
 <script type="text/javascript" th:src="@{/js/jquery.min.1.11.2.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap.min.3.3.0.js}"></script>
 <script type="text/javascript" th:src="@{/js/highcharts.js}"></script>
 <script type="text/javascript" th:src="@{/js/hr_cpuinfo_line.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.dataTables.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/zhap5_jmx_polling.js}"></script>
 
 </body></html>

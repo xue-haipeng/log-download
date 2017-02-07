@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,14 +49,29 @@ public class WlsJmxMonitorService {
     public List<Map<String, String>> pollingWlsVieJmx() {
         List<Map<String, String>> list = new ArrayList<>();
         host.forEach(h -> {
+            Map<String, String> server8001 = null;
+            Map<String, String> server8002 = null;
             try {
-                Map<String, String> server8001 = WlsJmxMonitorUtils.serverStatePolling(h,"8001", username, passwd);
-                Map<String, String> server8002 = WlsJmxMonitorUtils.serverStatePolling(h,"8002", username, passwd);
+                server8001 = WlsJmxMonitorUtils.serverStatePolling(h,"8001", username, passwd);
                 list.add(server8001);
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+                if (server8001 == null) {
+                    server8001 = new HashMap<>();
+                    server8001.put("serverName", h + ":8001");
+                    list.add(server8001);
+                }
+            }
+            try {
+                server8002 = WlsJmxMonitorUtils.serverStatePolling(h,"8002", username, passwd);
                 list.add(server8002);
             } catch (Exception e) {
                 logger.error(e.getMessage());
-                e.printStackTrace();
+                if (server8002 == null) {
+                    server8002 = new HashMap<>();
+                    server8002.put("serverName", h + ":8002");
+                    list.add(server8002);
+                }
             }
         });
         return list;

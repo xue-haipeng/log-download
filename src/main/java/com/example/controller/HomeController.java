@@ -38,7 +38,11 @@ public class HomeController {
     @RequestMapping("/zzkf/zhap5_data")
     @ResponseBody
     public List<Map<String, String>> pollWlsJmxState() {
-        return service.pollingWlsVieJmx();
+        long start = System.nanoTime();
+        List<Map<String, String>> list = service.pollingWlsVieJmx();
+        long end = System.nanoTime();
+        System.out.println("********************  " + (end - start) + "  *********************");
+        return list;
     }
 
     @RequestMapping("/jcpt/xoaps")

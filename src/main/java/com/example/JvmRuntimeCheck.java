@@ -1,7 +1,6 @@
 package com.example;
 
-import com.example.utils.WlsJmxMonitorUtils;
-
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -15,9 +14,20 @@ public class JvmRuntimeCheck {
         String portString = "8002";
         String username = "weblogic";
         String password = "xfvenc&7";
-
+/*
         Map<String, String> map = WlsJmxMonitorUtils.serverStatePolling(hostname, portString, username, password);
-        map.forEach((k, v) -> System.out.println(k + " : " + v));
+        map.forEach((k, v) -> System.out.println(k + " : " + v));*/
+
+        Map<String, String> map = new HashMap<>();
+        if (map.isEmpty()) {
+            System.out.println("Empty");
+        }
+        if (map == null) {
+            System.out.println("Null");
+        }
+        if (!map.containsKey("abc")) {
+            System.out.println("it works!");
+        }
 
     }
 }
