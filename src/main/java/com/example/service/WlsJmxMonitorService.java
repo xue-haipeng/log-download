@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.stream.Collectors;
 
 /**
  * Created by Xue on 11/30/16.
@@ -21,6 +26,15 @@ public class WlsJmxMonitorService {
     private List<String> host;
     private String username;
     private String passwd;
+
+    private final Executor executor = Executors.newFixedThreadPool(2 * host.size(), new ThreadFactory() {
+        @Override
+        public Thread newThread(Runnable r) {
+            Thread thread = new Thread(r);
+            thread.setDaemon(true);
+            return thread;
+        }
+    });
 
     public List<String> getHost() {
         return host;
@@ -47,7 +61,27 @@ public class WlsJmxMonitorService {
     }
 
     public List<Map<String, String>> pollingWlsVieJmx() {
-        List<Map<String, String>> list = new ArrayList<>();
+        List<CompletableFuture<Map<String, String>>> futureList =
+                host.stream().map(h -> CompletableFuture.supplyAsync(
+                        () -> {
+                            List<Map<String, String>> list = new ArrayList<>();
+                            Map<String, String> server = null;
+                            try {
+                                server = WlsJmxMonitorUtils.serverStatePolling(h.split("#")[0], h.split("#")[1], username, passwd);
+                            } catch (Exception e) {
+                                logger.error(e.getMessage());
+                                if (server == null) {
+                                    server = new HashMap<>();
+                                    server.put("serverName", h.replace("#", ":"));
+                                }
+                            }
+                            return server;
+                        }, executor
+                )).collect(Collectors.toList());
+
+        return futureList.stream().map(CompletableFuture :: join).collect(Collectors.toList());
+
+        /*List<Map<String, String>> list = new ArrayList<>();
         host.forEach(h -> {
             Map<String, String> server8001 = null;
             Map<String, String> server8002 = null;
@@ -74,6 +108,6 @@ public class WlsJmxMonitorService {
                 }
             }
         });
-        return list;
+        return list;*/
     }
 }
