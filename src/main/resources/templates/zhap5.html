@@ -5,11 +5,12 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.3.3.0.css}" />
     <link rel="stylesheet" th:href="@{/css/buttons.css}" />
     <link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" />
 
     <style>
         div {
             font-family: "Microsoft YaHei UI", Arial;
-            padding: 8px;
+            padding: 7px;
             text-align: center;
         }
         .button-small {
@@ -20,10 +21,8 @@
         }
         h2 {
             text-align: center;
-            padding-bottom: 20px;
         }
         #zhap5 {
-            padding-top: 20px;
             text-align: center;
         }
         .modal-dialog {
@@ -35,6 +34,69 @@
             /* padding: 15px; */
             padding-top: 0;
             padding-bottom: 0;
+        }
+
+        #accordion{
+            padding-left: 76px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+        #accordion:before{
+            content: "";
+            width: 1px;
+            height: 90%;
+            background: #9d325b;
+            position: absolute;
+            top: 0;
+            left: 22px;
+            z-index: -1;
+        }
+        #accordion .panel{
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+        }
+        #accordion .panel-heading{
+            padding: 0;
+            border-radius: 0;
+            border: none;
+        }
+        #accordion .panel-title a{
+            display: block;
+            font-size: 16px;
+            font-weight: bold;
+            color: #31162e;
+            /*padding: 10px 30px 15px 0;*/
+            background: #fff;
+            position: relative;
+            transition: all 0.5s ease 0s;
+        }
+        #accordion .panel-title a:before{
+            content: "\f05b";
+            font-family: fontawesome;
+            font-size: 20px;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background: #9d325b;
+            border: 1px solid #9d325b;
+            position: absolute;
+            top: 0;
+            left: -74px;
+        }
+        #accordion .panel-title a.collapsed:before{
+            color: #9c335b;
+            background: #fff;
+        }
+        #accordion .panel-body{
+            font-size: 14px;
+            color: #487677;
+            line-height: 25px;
+            padding: 5px 15px 15px 0;
+            border: none;
         }
     </style>
 </head>
@@ -58,59 +120,167 @@
     </div>
 </div>
 
-<div id="title" class="row col-sm-12 col-md-12 col-lg-12">
+<div id="title" class="row col-sm-12 col-md-12 col-lg-12" style="padding-bottom: 0;">
     <div class=" col-sm-1 col-md-1 col-lg-1" style="padding-top: 1%; width: 11%;">
         <button class="btn btn-default" onclick="javascrtpt:window.location.href='/'"><span class="glyphicon glyphicon-arrow-left" style="color: rgba(68, 140, 202, 0.73);" aria-hidden="true"></span></button><a href="/"> 返回首页</a>
     </div>
 
     <h2 class="col-sm-10 col-md-10 col-lg-10">HR自主开发系统日志下载工具</h2>
 </div>
-<div class="row col-sm-12 col-md-12 col-lg-12">
-    <div class="col-sm-8 col-md-8 col-lg-8">
-        <div>
-            <a href="/download/10.30.41.80/ZHAP5_DOMAIN" class="button button-small button-raised button-primary button-pill">ZHAP5_DOMAIN.log</a>
-            <a href="/download/10.30.41.81/ZHAP5_Srv001" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv001.log</a>
-            <a href="/download/10.30.41.81/ZHAP5_Srv002" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv002.log</a>
-            <a href="/download/10.30.41.82/ZHAP5_Srv011" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv011.log</a>
-        </div>
-        <div>
-            <a href="/download/10.30.41.82/ZHAP5_Srv012" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv012.log</a>
-            <a href="/download/10.30.41.79/ZHAP5_Srv021" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv021.log</a>
-            <a href="/download/10.30.41.79/ZHAP5_Srv022" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv022.log</a>
-            <a href="/download/10.30.41.78/ZHAP5_Srv031" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv031.log</a>
-        </div>
-        <div>
-            <a href="/download/10.30.41.78/ZHAP5_Srv032" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv032.log</a>
-            <a href="/download/10.30.41.69/ZHAP5_Srv041" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv041.log</a>
-            <a href="/download/10.30.41.69/ZHAP5_Srv042" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv042.log</a>
-            <a href="/download/10.30.41.68/ZHAP5_Srv051" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv051.log</a>
-        </div>
-        <div>
-            <a href="/download/10.30.41.68/ZHAP5_Srv052" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv052.log</a>
-            <a href="/download/10.30.41.67/ZHAP5_Srv061" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv061.log</a>
-            <a href="/download/10.30.41.67/ZHAP5_Srv062" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv062.log</a>
-            <a href="/download/10.30.41.66/ZHAP5_Srv071" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv071.log</a>
-        </div>
-        <div>
-            <a href="/download/10.30.41.66/ZHAP5_Srv072" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv072.log</a>
-            <a href="/download/10.30.41.101/ZHAP5_Srv081" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv081.log</a>
-            <a href="/download/10.30.41.101/ZHAP5_Srv082" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv082.log</a>
+<div class="row col-sm-12 col-md-12 col-lg-12" style="padding-bottom: 0;">
+    <div class="col-sm-8 col-md-8 col-lg-8" style="padding-bottom: 0;">
+        <div id="accordion" role="tablist" aria-multiselectable="true" style="padding-top: 0; padding-bottom: 0;">
+            <div class="panel panel-default" style="padding-top: 0; padding-bottom: 0;">
+                <div class="panel-heading" style="text-align: left;" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="padding-top: 10px;">
+                            WebLogic日志
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        <div>
+                            <a href="/download/10.30.41.80/ZHAP5_DOMAIN" class="button button-small button-raised button-primary button-pill">ZHAP5_DOMAIN.log</a>
+                            <a href="/download/10.30.41.81/ZHAP5_Srv001" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv001.log</a>
+                            <a href="/download/10.30.41.81/ZHAP5_Srv002" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv002.log</a>
+                            <a href="/download/10.30.41.82/ZHAP5_Srv011" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv011.log</a>
+                        </div>
+                        <div>
+                            <a href="/download/10.30.41.82/ZHAP5_Srv012" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv012.log</a>
+                            <a href="/download/10.30.41.79/ZHAP5_Srv021" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv021.log</a>
+                            <a href="/download/10.30.41.79/ZHAP5_Srv022" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv022.log</a>
+                            <a href="/download/10.30.41.78/ZHAP5_Srv031" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv031.log</a>
+                        </div>
+                        <div>
+                            <a href="/download/10.30.41.78/ZHAP5_Srv032" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv032.log</a>
+                            <a href="/download/10.30.41.69/ZHAP5_Srv041" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv041.log</a>
+                            <a href="/download/10.30.41.69/ZHAP5_Srv042" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv042.log</a>
+                            <a href="/download/10.30.41.68/ZHAP5_Srv051" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv051.log</a>
+                        </div>
+                        <div>
+                            <a href="/download/10.30.41.68/ZHAP5_Srv052" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv052.log</a>
+                            <a href="/download/10.30.41.67/ZHAP5_Srv061" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv061.log</a>
+                            <a href="/download/10.30.41.67/ZHAP5_Srv062" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv062.log</a>
+                            <a href="/download/10.30.41.66/ZHAP5_Srv071" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv071.log</a>
+                        </div>
+                        <div>
+                            <a href="/download/10.30.41.66/ZHAP5_Srv072" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv072.log</a>
+                            <a href="/download/10.30.41.101/ZHAP5_Srv081" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv081.log</a>
+                            <a href="/download/10.30.41.101/ZHAP5_Srv082" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv082.log</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" style="padding-top: 0; padding-bottom: 0;">
+                <div class="panel-heading" style="text-align: left;" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="padding-top: 10px;">
+                            标准输出日志
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        <div>
+                            <a href="/download/10.30.41.80/ZHAP5_DOMAIN" class="button button-small button-raised button-highlight button-pill">ZHAP5_DOMAIN.out</a>
+                            <a href="/download/10.30.41.81/ZHAP5_Srv001" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv001.out</a>
+                            <a href="/download/10.30.41.81/ZHAP5_Srv002" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv002.out</a>
+                            <a href="/download/10.30.41.82/ZHAP5_Srv011" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv011.out</a>
+                        </div>
+                        <div>
+                            <a href="/download/10.30.41.82/ZHAP5_Srv012" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv012.out</a>
+                            <a href="/download/10.30.41.79/ZHAP5_Srv021" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv021.out</a>
+                            <a href="/download/10.30.41.79/ZHAP5_Srv022" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv022.out</a>
+                            <a href="/download/10.30.41.78/ZHAP5_Srv031" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv031.out</a>
+                        </div>
+                        <div>
+                            <a href="/download/10.30.41.78/ZHAP5_Srv032" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv032.out</a>
+                            <a href="/download/10.30.41.69/ZHAP5_Srv041" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv041.out</a>
+                            <a href="/download/10.30.41.69/ZHAP5_Srv042" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv042.out</a>
+                            <a href="/download/10.30.41.68/ZHAP5_Srv051" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv051.out</a>
+                        </div>
+                        <div>
+                            <a href="/download/10.30.41.68/ZHAP5_Srv052" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv052.out</a>
+                            <a href="/download/10.30.41.67/ZHAP5_Srv061" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv061.out</a>
+                            <a href="/download/10.30.41.67/ZHAP5_Srv062" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv062.out</a>
+                            <a href="/download/10.30.41.66/ZHAP5_Srv071" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv071.out</a>
+                        </div>
+                        <div>
+                            <a href="/download/10.30.41.66/ZHAP5_Srv072" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv072.out</a>
+                            <a href="/download/10.30.41.101/ZHAP5_Srv081" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv081.out</a>
+                            <a href="/download/10.30.41.101/ZHAP5_Srv082" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv082.out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" style="padding-top: 0; padding-bottom: 0;">
+                <div class="panel-heading" style="text-align: left;" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="padding-top: 10px;">
+                            GC日志
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        <div>
+                            <a href="/download/10.30.41.80/ZHAP5_DOMAIN" class="button button-small button-raised button-action button-pill">ZHAP5_DOMAIN.gc</a>
+                            <a href="/download/10.30.41.81/ZHAP5_Srv001" class="button button-small button-raised button-action button-pill">ZHAP5_Srv001.gc</a>
+                            <a href="/download/10.30.41.81/ZHAP5_Srv002" class="button button-small button-raised button-action button-pill">ZHAP5_Srv002.gc</a>
+                            <a href="/download/10.30.41.82/ZHAP5_Srv011" class="button button-small button-raised button-action button-pill">ZHAP5_Srv011.gc</a>
+                        </div>
+                        <div>
+                            <a href="/download/10.30.41.82/ZHAP5_Srv012" class="button button-small button-raised button-action button-pill">ZHAP5_Srv012.gc</a>
+                            <a href="/download/10.30.41.79/ZHAP5_Srv021" class="button button-small button-raised button-action button-pill">ZHAP5_Srv021.gc</a>
+                            <a href="/download/10.30.41.79/ZHAP5_Srv022" class="button button-small button-raised button-action button-pill">ZHAP5_Srv022.gc</a>
+                            <a href="/download/10.30.41.78/ZHAP5_Srv031" class="button button-small button-raised button-action button-pill">ZHAP5_Srv031.gc</a>
+                        </div>
+                        <div>
+                            <a href="/download/10.30.41.78/ZHAP5_Srv032" class="button button-small button-raised button-action button-pill">ZHAP5_Srv032.gc</a>
+                            <a href="/download/10.30.41.69/ZHAP5_Srv041" class="button button-small button-raised button-action button-pill">ZHAP5_Srv041.gc</a>
+                            <a href="/download/10.30.41.69/ZHAP5_Srv042" class="button button-small button-raised button-action button-pill">ZHAP5_Srv042.gc</a>
+                            <a href="/download/10.30.41.68/ZHAP5_Srv051" class="button button-small button-raised button-action button-pill">ZHAP5_Srv051.gc</a>
+                        </div>
+                        <div>
+                            <a href="/download/10.30.41.68/ZHAP5_Srv052" class="button button-small button-raised button-action button-pill">ZHAP5_Srv052.gc</a>
+                            <a href="/download/10.30.41.67/ZHAP5_Srv061" class="button button-small button-raised button-action button-pill">ZHAP5_Srv061.gc</a>
+                            <a href="/download/10.30.41.67/ZHAP5_Srv062" class="button button-small button-raised button-action button-pill">ZHAP5_Srv062.gc</a>
+                            <a href="/download/10.30.41.66/ZHAP5_Srv071" class="button button-small button-raised button-action button-pill">ZHAP5_Srv071.gc</a>
+                        </div>
+                        <div>
+                            <a href="/download/10.30.41.66/ZHAP5_Srv072" class="button button-small button-raised button-action button-pill">ZHAP5_Srv072.gc</a>
+                            <a href="/download/10.30.41.101/ZHAP5_Srv081" class="button button-small button-raised button-action button-pill">ZHAP5_Srv081.gc</a>
+                            <a href="/download/10.30.41.101/ZHAP5_Srv082" class="button button-small button-raised button-action button-pill">ZHAP5_Srv082.gc</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-sm-4 col-md-4 col-lg-4" style="padding-top: 3%">
-        <div style="padding: 2%;">
-            <button id="aserver" type="button" class="btn btn-success" aria-label="Left Align">
-                <span class="glyphicon glyphicon-play" aria-hidden="true"><span style="font-family: 'Microsoft YaHei UI', Arial;">通过AdminServer巡检</span></span>
-            </button>
-        </div>
-        <div style="padding: 2%;">
-            <button id="mserver" type="button" class="btn btn-warning" aria-label="Left Align" data-toggle="modal" data-target="#mserverModal">
-                <span class="glyphicon glyphicon-play" aria-hidden="true"><span style="font-family: 'Microsoft YaHei UI', Arial;">对每个Server单独巡检</span></span>
-            </button>
-        </div>
-        <div style="padding-top: 12%; text-align: left">
-            <p style="font-family: 'Microsoft YaHei UI', Arial;">WebLogic管理控制台可用时请使用 <span style="color: #449d44;"><b>通过AdminServer巡检</b></span></p>
-            <p style="font-family: 'Microsoft YaHei UI', Arial;">WebLogic管理控制台不可用时可用 <span style="color: #ec971f;"><b>对每个Server单独巡检</b></span></p>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Server状态巡检</h3>
+            </div>
+            <div class="panel-body">
+                <div style="padding: 2%; text-align: left; padding-left: 25%; padding-top: 20px;">
+                    <button id="aserver" type="button" class="btn btn-success" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-play" aria-hidden="true"><span style="font-family: 'Microsoft YaHei UI', Arial;">通过AdminServer巡检</span></span>
+                    </button>
+                </div>
+                <div style="padding: 2%; text-align: left; padding-left: 25%;">
+                    <button id="mserver" type="button" class="btn btn-warning" aria-label="Left Align" data-toggle="modal" data-target="#mserverModal">
+                        <span class="glyphicon glyphicon-play" aria-hidden="true"><span style="font-family: 'Microsoft YaHei UI', Arial;">对每个Server单独巡检</span></span>
+                    </button>
+                </div>
+                <div style="padding-top: 12%; text-align: left">
+                    <p style="font-family: 'Microsoft YaHei UI', Arial; text-align: left;">WebLogic管理控制台可用时请使用 <span style="color: #449d44;"><b>通过AdminServer巡检</b></span></p>
+                    <p style="font-family: 'Microsoft YaHei UI', Arial; text-align: left;">WebLogic管理控制台不可用时可用 <span style="color: #ec971f;"><b>对每个Server单独巡检</b></span></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

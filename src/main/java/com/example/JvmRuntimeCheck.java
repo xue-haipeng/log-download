@@ -11,11 +11,15 @@ public class JvmRuntimeCheck {
 
     public static void main(String[] args) throws Exception {
 //        String hostname = "10.30.41.80";
-        String hostname = "10.30.41.101";
-        String portString = "8002";
-        String username = "checker";
-        String password = "erpbasis0";
+        String hostname = "10.30.41.140";
+        String portString = "7001";
+        String username = "monitor";
+        String password = "abcd1234";
+
+        long start = System.nanoTime();
         Map<String, String> map = WlsJmxMonitorUtils.serverStatePolling(hostname, portString, username, password);
+        long end = System.nanoTime();
+        System.out.println("****** " + (end - start));
         map.forEach((k, v) -> System.out.println(k + " : " + v));
 /*
         Map<String, String> map = new HashMap<>();
