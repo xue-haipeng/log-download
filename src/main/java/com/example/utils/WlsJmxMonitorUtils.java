@@ -57,7 +57,7 @@ public class WlsJmxMonitorUtils {
                 return "CurrentApps".equals((String) connection.getAttribute(app,"Name"));
             } catch (MBeanException | AttributeNotFoundException | InstanceNotFoundException | ReflectionException | IOException e) {
                 logger.error(e.getMessage());
-                e.getCause();
+                e.printStackTrace();
             }
             return false;
         }).findAny();
@@ -80,6 +80,32 @@ public class WlsJmxMonitorUtils {
                     map.put("openSessions", openSessions);
                     logger.info("openSessions: {}", openSessions);
                 }
+            } catch (MBeanException | AttributeNotFoundException | InstanceNotFoundException | ReflectionException | IOException e) {
+                logger.error(e.getMessage());
+                e.printStackTrace();
+            }
+        });
+
+        Optional<ObjectName> optJdbcRT = Arrays.stream(appRT).filter(app -> {
+            try {
+                return "CNPCHRConnDS".equals((String) connection.getAttribute(app,"Name"));
+            } catch (MBeanException | AttributeNotFoundException | InstanceNotFoundException | ReflectionException | IOException e) {
+                logger.error(e.getMessage());
+                e.printStackTrace();
+            }
+            return false;
+        }).findAny();
+        optJdbcRT.ifPresent(app -> {
+            try {
+                ObjectName[] compRT = (ObjectName[]) connection.getAttribute(app,"ComponentRuntimes");
+                int dsActiveConn = (int) connection.getAttribute(compRT[0],"ActiveConnectionsCurrentCount");
+                map.put("dsActiveConn", Integer.toString(dsActiveConn));
+                int dsCapacity = (int) connection.getAttribute(compRT[0],"CurrCapacity");
+                map.put("dsCapacity", Integer.toString(dsCapacity));
+                int dsState = (int) connection.getAttribute(compRT[0],"DeploymentState");
+                map.put("dsState", activeStateMapToString(dsState));
+                int dsLeakedConn = (int) connection.getAttribute(compRT[0],"LeakedConnectionCount");
+                map.put("dsLeakedConn", Integer.toString(dsLeakedConn));
             } catch (MBeanException | AttributeNotFoundException | InstanceNotFoundException | ReflectionException | IOException e) {
                 logger.error(e.getMessage());
                 e.printStackTrace();

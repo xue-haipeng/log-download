@@ -11,69 +11,19 @@ $(function() {
             },
             "columns": [
                 { "data": "serverName" },
-                { "data": "serverState" ,
-                    render: function (data, type, row) {
-                        if (data.length == 0) {
-                            return 'N/A';
-                        }
-                    }
-                },
-                { "data": "serverHealth" ,
-                    render: function (data, type, row) {
-                        if (data.length == 0) {
-                            return 'N/A';
-                        }
-                    }
-                },
-                { "data": "heapSizeCurrent" ,
-                    render: function (data, type, row) {
-                        if (data.length == 0) {
-                            return 'N/A';
-                        }
-                    }
-                },
-                { "data": "heapFreeCurrent" ,
-                    render: function (data, type, row) {
-                        if (data.length == 0) {
-                            return 'N/A';
-                        }
-                    }
-                },
-                { "data": "heapFreePercent" ,
-                    render: function (data, type, row) {
-                        if (data.length == 0) {
-                            return 'N/A';
-                        }
-                    }
-                },
-                { "data": "appName" ,
-                    render: function (data, type, row) {
-                        if (data.length == 0) {
-                            return 'N/A';
-                        }
-                    }
-                },
-                { "data": "appActiveState" ,
-                    render: function (data, type, row) {
-                        if (data.length == 0) {
-                            return 'N/A';
-                        }
-                    }
-                },
-                { "data": "appHealthState" ,
-                    render: function (data, type, row) {
-                        if (data.length == 0) {
-                            return 'N/A';
-                        }
-                    }
-                },
-                { "data": "openSessions" ,
-                    render: function (data, type, row) {
-                        if (data.length == 0) {
-                            return 'N/A';
-                        }
-                    }
-                }
+                { "data": "serverState" , "defaultContent": "" },
+                { "data": "serverHealth" , "defaultContent": "" },
+                { "data": "heapSizeCurrent" , "defaultContent": "" },
+                { "data": "heapFreeCurrent" , "defaultContent": "" },
+                { "data": "heapFreePercent" , "defaultContent": "" },
+                { "data": "appName" , "defaultContent": "" },
+                { "data": "appActiveState" , "defaultContent": "" },
+                { "data": "appHealthState" , "defaultContent": "" },
+                { "data": "openSessions" , "defaultContent": "" },
+                { "data": "dsState" , "defaultContent": "" },
+                { "data": "dsCapacity" , "defaultContent": "" },
+                { "data": "dsActiveConn" , "defaultContent": "" },
+                { "data": "dsLeakedConn" , "defaultContent": "" }
             ]
         });
     });

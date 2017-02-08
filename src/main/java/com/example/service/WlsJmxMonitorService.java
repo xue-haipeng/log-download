@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,7 @@ public class WlsJmxMonitorService {
     private String username;
     private String passwd;
 
-    private final Executor executor = Executors.newFixedThreadPool(2 * host.size(), new ThreadFactory() {
+    private final Executor executor = Executors.newFixedThreadPool(24, new ThreadFactory() {
         @Override
         public Thread newThread(Runnable r) {
             Thread thread = new Thread(r);
@@ -64,7 +63,6 @@ public class WlsJmxMonitorService {
         List<CompletableFuture<Map<String, String>>> futureList =
                 host.stream().map(h -> CompletableFuture.supplyAsync(
                         () -> {
-                            List<Map<String, String>> list = new ArrayList<>();
                             Map<String, String> server = null;
                             try {
                                 server = WlsJmxMonitorUtils.serverStatePolling(h.split("#")[0], h.split("#")[1], username, passwd);

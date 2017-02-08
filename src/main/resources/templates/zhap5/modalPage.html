@@ -3,8 +3,8 @@
 <head>
 </head>
 <body>
-<div th:fragment="mserver_fragment" id="mserver_ul" style="text-align: left; color: #3e8e54;">
-    <table id="mserver_table" class="display" cellspacing="0" width="100%">
+<div th:fragment="mserver_fragment" id="mserver_ul" style="text-align: left; color: #007535;">
+    <table id="mserver_table" class="display" cellspacing="0" width="100%" style="font-size: 12px;">
         <thead>
             <tr>
                 <th>Server</th>
@@ -17,6 +17,10 @@
                 <th>AppState</th>
                 <th>AppHealth</th>
                 <th>Sessions</th>
+                <th>数据源状态</th>
+                <th>连接池容量</th>
+                <th>活动连接</th>
+                <th>泄露连接</th>
             </tr>
         </thead>
     </table>
