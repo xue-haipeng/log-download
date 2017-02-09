@@ -49,6 +49,7 @@ public class WlsJmxConnUtils {
         h.put(Context.SECURITY_PRINCIPAL, username);
         h.put(Context.SECURITY_CREDENTIALS, passwd);
         h.put(JMXConnectorFactory.PROTOCOL_PROVIDER_PACKAGES, "weblogic.management.remote");
+        h.put("jmx.remote.x.request.waiting.timeout", new Long(10000));
         JMXConnector connector = JMXConnectorFactory.connect(serviceURL, h);
         return connector.getMBeanServerConnection();
     }

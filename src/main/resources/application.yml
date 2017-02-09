@@ -16,16 +16,16 @@ sftp:
     username: itmuser
     passwd: itmuser
     logfiles:
-        10.30.41.80: /oracle/admin/ZHAP5_DOMAIN/aserver/ZHAP5_DOMAIN/servers/AdminServer/logs/ZHAP5_DOMAI{}.log
-        10.30.41.81: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv00{}/logs/ZHAP5_Srv00{}.log
-        10.30.41.82: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv01{}/logs/ZHAP5_Srv01{}.log
-        10.30.41.79: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv02{}/logs/ZHAP5_Srv02{}.log
-        10.30.41.78: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv03{}/logs/ZHAP5_Srv03{}.log
-        10.30.41.69: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv04{}/logs/ZHAP5_Srv04{}.log
-        10.30.41.68: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv05{}/logs/ZHAP5_Srv05{}.log
-        10.30.41.67: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv06{}/logs/ZHAP5_Srv06{}.log
-        10.30.41.66: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv07{}/logs/ZHAP5_Srv07{}.log
-        10.30.41.101: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv08{}/logs/ZHAP5_Srv08{}.log
+        10.30.41.80: /oracle/admin/ZHAP5_DOMAIN/aserver/ZHAP5_DOMAIN/servers/AdminServer/logs/ZHAP5_DOMAI{}.[]
+        10.30.41.81: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv00{}/logs/ZHAP5_Srv00{}.[]
+        10.30.41.82: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv01{}/logs/ZHAP5_Srv01{}.[]
+        10.30.41.79: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv02{}/logs/ZHAP5_Srv02{}.[]
+        10.30.41.78: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv03{}/logs/ZHAP5_Srv03{}.[]
+        10.30.41.69: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv04{}/logs/ZHAP5_Srv04{}.[]
+        10.30.41.68: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv05{}/logs/ZHAP5_Srv05{}.[]
+        10.30.41.67: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv06{}/logs/ZHAP5_Srv06{}.[]
+        10.30.41.66: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv07{}/logs/ZHAP5_Srv07{}.[]
+        10.30.41.101: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv08{}/logs/ZHAP5_Srv08{}.[]
 
 # Ssh Configuration
 ssh:
@@ -87,6 +87,10 @@ jmx:
             - 10.30.41.76#8002
             - 10.30.41.77#8001
             - 10.30.41.77#8002
+        aserverUrl:
+            10.30.41.80
+        aserverPort:
+            7001
         username:
             checker
         passwd:

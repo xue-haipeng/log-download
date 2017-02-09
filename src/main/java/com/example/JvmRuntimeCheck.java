@@ -21,6 +21,7 @@ public class JvmRuntimeCheck {
         long end = System.nanoTime();
         System.out.println("****** " + (end - start));
         map.forEach((k, v) -> System.out.println(k + " : " + v));
+
 /*
         Map<String, String> map = new HashMap<>();
         if (map.isEmpty()) {

@@ -23,10 +23,21 @@ import java.util.stream.Collectors;
 public class WlsJmxMonitorService {
     private static final Logger logger = LoggerFactory.getLogger(WlsJmxMonitorService.class);
     private List<String> host;
+    private String aserverUrl;
+    private String aserverPort;
     private String username;
     private String passwd;
 
-    private final Executor executor = Executors.newFixedThreadPool(24, new ThreadFactory() {
+    private final Executor serverExecutor = Executors.newFixedThreadPool(24, new ThreadFactory() {
+        @Override
+        public Thread newThread(Runnable r) {
+            Thread thread = new Thread(r);
+            thread.setDaemon(true);
+            return thread;
+        }
+    });
+
+    private final Executor domainExecutor = Executors.newFixedThreadPool(25, new ThreadFactory() {
         @Override
         public Thread newThread(Runnable r) {
             Thread thread = new Thread(r);
@@ -59,6 +70,22 @@ public class WlsJmxMonitorService {
         this.passwd = passwd;
     }
 
+    public String getAserverUrl() {
+        return aserverUrl;
+    }
+
+    public void setAserverUrl(String aserverUrl) {
+        this.aserverUrl = aserverUrl;
+    }
+
+    public String getAserverPort() {
+        return aserverPort;
+    }
+
+    public void setAserverPort(String aserverPort) {
+        this.aserverPort = aserverPort;
+    }
+
     public List<Map<String, String>> pollingWlsVieJmx() {
         List<CompletableFuture<Map<String, String>>> futureList =
                 host.stream().map(h -> CompletableFuture.supplyAsync(
@@ -74,38 +101,13 @@ public class WlsJmxMonitorService {
                                 }
                             }
                             return server;
-                        }, executor
+                        }, serverExecutor
                 )).collect(Collectors.toList());
 
         return futureList.stream().map(CompletableFuture :: join).collect(Collectors.toList());
+    }
 
-        /*List<Map<String, String>> list = new ArrayList<>();
-        host.forEach(h -> {
-            Map<String, String> server8001 = null;
-            Map<String, String> server8002 = null;
-            try {
-                server8001 = WlsJmxMonitorUtils.serverStatePolling(h,"8001", username, passwd);
-                list.add(server8001);
-            } catch (Exception e) {
-                logger.error(e.getMessage());
-                if (server8001 == null) {
-                    server8001 = new HashMap<>();
-                    server8001.put("serverName", h + ":8001");
-                    list.add(server8001);
-                }
-            }
-            try {
-                server8002 = WlsJmxMonitorUtils.serverStatePolling(h,"8002", username, passwd);
-                list.add(server8002);
-            } catch (Exception e) {
-                logger.error(e.getMessage());
-                if (server8002 == null) {
-                    server8002 = new HashMap<>();
-                    server8002.put("serverName", h + ":8002");
-                    list.add(server8002);
-                }
-            }
-        });
-        return list;*/
+    public List<Map<String, String>> pollingDomainVieJmx() throws Exception {
+        return WlsJmxMonitorUtils.domainStatePolling(aserverUrl, aserverPort, username, passwd, domainExecutor);
     }
 }

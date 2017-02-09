@@ -40,11 +40,16 @@ public class SftpInvokeService {
         this.logfiles = logfiles;
     }
 
-    public void logFileDownload(String ip, String logName) {
+    public void logFileDownload(String ip, String type, String logName) {
         String username = getUsername();
         String passwd = getPasswd();
-
-        String logPath = getLogfiles().get(ip).replace("{}", logName);
+        String logPath;
+        if ("log".equals(type) || "out".equals(type)) {
+            logPath = getLogfiles().get(ip).replace("{}", logName).replace("[]", type);
+        } else {
+            String tmp = getLogfiles().get(ip).replace("{}", logName).replace("[]", "log");
+            logPath = "/oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/gc_" + tmp.substring(tmp.length() - 16);
+        }
 
         try {
             SFTPGetTest.sftpDownload(ip, username, passwd, logPath);
