@@ -123,7 +123,7 @@ public class ServerRuntimeCheck {
             }
         });
     }
-
+/*
     public static void main(String[] args) throws Exception {
         String hostname = "192.168.147.133";
         String portString = "7001";
@@ -135,6 +135,6 @@ public class ServerRuntimeCheck {
         s.printNameAndState();
         s.printAppState();
         connector.close();
-    }
+    }*/
 }
 

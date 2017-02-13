@@ -78,7 +78,7 @@ public class MonitorServlets {
             }
         }
     }
-    public static void main(String[] args) throws Exception {
+/*    public static void main(String[] args) throws Exception {
         String hostname = "192.168.147.133";
         String portString = "7001";
         String username = "weblogic";
@@ -87,5 +87,5 @@ public class MonitorServlets {
         initConnection(hostname, portString, username, password);
         s.getServletData();
         connector.close();
-    }
+    }*/
 }

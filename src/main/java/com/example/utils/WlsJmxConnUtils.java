@@ -19,6 +19,8 @@ public class WlsJmxConnUtils {
     private static final String serverRuntime = "weblogic.management.mbeanservers.runtime";
     private static final ObjectName domainService;
     private static final ObjectName serverService;
+    public static MBeanServerConnection domainMBeanServerConnection;
+    public static MBeanServerConnection serverMBeanServerConnection;
 
     static {
         try {
@@ -40,6 +42,12 @@ public class WlsJmxConnUtils {
 
     public static MBeanServerConnection getJmxConnection(String hostname, String portString, String username, String passwd,
                                       String runtimeType) throws IOException {
+        if ("weblogic.management.mbeanservers.domainruntime".equals(runtimeType) && domainMBeanServerConnection != null){
+            return domainMBeanServerConnection;
+        }
+        if ("weblogic.management.mbeanservers.runtime".equals(runtimeType) && serverMBeanServerConnection != null) {
+            return serverMBeanServerConnection;
+        }
         String protocol = "t3";
         Integer portInteger = Integer.valueOf(portString);
         int port = portInteger.intValue();

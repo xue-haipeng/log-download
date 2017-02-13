@@ -1,16 +1,10 @@
 package com.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 /**
  * Created by Xue on 02/01/17.
  */
 public class StreamLearn01 {
-
+/*
     public static void main(String[] args) {
 
         List<Integer> number1 = Arrays.asList(1, 2, 3);
@@ -22,9 +16,9 @@ public class StreamLearn01 {
 
         pairs.forEach(l -> System.out.println(l[0] + " : " + l[1]));
 
-        /**
+        *//**
          *
-         */
+         *//*
         List<List<Integer>> outer = new ArrayList<>();
         List<Integer> inner1 = new ArrayList<>();
         inner1.add(1);
@@ -57,5 +51,5 @@ public class StreamLearn01 {
 //        Stream.of(l1, l2).flatMap(n -> n.stream()).filter(n -> n%2 == 0).forEach(System.out::println);
         List<Integer> list = Stream.of(l1, l2).flatMap(n -> n.stream()).filter(n -> n%2 == 0).collect(Collectors.toList());
         Stream.of(l1, l2).flatMap(n -> n.stream()).filter(n -> n%2 == 0).map(i -> i + " : ").forEach(System.out::print);
-    }
+    }*/
 }

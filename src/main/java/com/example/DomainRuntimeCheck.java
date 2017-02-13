@@ -256,7 +256,7 @@ public class DomainRuntimeCheck {
         list.forEach(System.out :: println);
         System.out.println("********** " + (end - start) + " *************");*/
     }
-
+/*
     public static void main(String[] args) throws Exception {
         String hostname = "10.30.41.80";
         String portString = "7001";
@@ -270,6 +270,6 @@ public class DomainRuntimeCheck {
         long end = System.nanoTime();
         System.out.println("*********** " + (end - start));
         connector.close();
-    }
+    }*/
 }
 

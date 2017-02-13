@@ -6,11 +6,12 @@
     <link rel="stylesheet" th:href="@{/css/buttons.css}" />
     <link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}" />
     <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap-switch.css}" />
 
     <style>
         div {
             font-family: "Microsoft YaHei UI", Arial;
-            padding: 7px;
+            /*padding: 7px;*/
             text-align: center;
         }
         .button-small {
@@ -21,6 +22,9 @@
         }
         h2 {
             text-align: center;
+        }
+        a {
+            font-size: small;
         }
         #zhap5 {
             text-align: center;
@@ -98,22 +102,28 @@
             padding: 5px 15px 15px 0;
             border: none;
         }
+        .button-small {
+            font-size: 12px;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 27px;
+        }
     </style>
 </head>
 <body>
 <!-- MServer Polling Modal -->
 <div class="modal fade" id="mserverModal" tabindex="-1" role="dialog" aria-labelledby="mserverModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" style="font-size: small; width: 95%">
             <div class="modal-header" style="background-color: #ecebeb;">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
                 </button>
-                <h3 class="modal-title" style="text-align: left">各Server状态</h3>
+                <h3 class="modal-title" style="text-align: left; font-size: 22px;">各Server状态</h3>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="padding-left: 0;">
                 <div th:replace="zhap5/modalPage :: mserver_fragment" style="text-align: left;"></div>
             </div>
-            <div class="modal-footer" style="background-color: #ecebeb;">
+            <div class="modal-footer" style="background-color: #ecebeb; width: 98%;">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
             </div>
         </div>
@@ -133,38 +143,38 @@
             <div class="panel panel-default" style="padding-top: 0; padding-bottom: 0;">
                 <div class="panel-heading" style="text-align: left;" role="tab" id="headingOne">
                     <h4 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="padding-top: 10px;">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="padding-top: 10px; font-size: small;">
                             WebLogic日志
                         </a>
                     </h4>
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="panel-body">
-                        <div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" style="padding-bottom: 0px;">
+                    <div class="panel-body" style="font-size: 10px;">
+                        <div style="padding: 7px;">
                             <a href="/download/10.30.41.80/ZHAP5_DOMAIN/log" class="button button-small button-raised button-primary button-pill">ZHAP5_DOMAIN.log</a>
                             <a href="/download/10.30.41.81/ZHAP5_Srv001/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv001.log</a>
                             <a href="/download/10.30.41.81/ZHAP5_Srv002/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv002.log</a>
                             <a href="/download/10.30.41.82/ZHAP5_Srv011/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv011.log</a>
                         </div>
-                        <div>
+                        <div style="padding: 7px;">
                             <a href="/download/10.30.41.82/ZHAP5_Srv012/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv012.log</a>
                             <a href="/download/10.30.41.79/ZHAP5_Srv021/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv021.log</a>
                             <a href="/download/10.30.41.79/ZHAP5_Srv022/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv022.log</a>
                             <a href="/download/10.30.41.78/ZHAP5_Srv031/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv031.log</a>
                         </div>
-                        <div>
+                        <div style="padding: 7px;">
                             <a href="/download/10.30.41.78/ZHAP5_Srv032/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv032.log</a>
                             <a href="/download/10.30.41.69/ZHAP5_Srv041/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv041.log</a>
                             <a href="/download/10.30.41.69/ZHAP5_Srv042/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv042.log</a>
                             <a href="/download/10.30.41.68/ZHAP5_Srv051/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv051.log</a>
                         </div>
-                        <div>
+                        <div style="padding: 7px;">
                             <a href="/download/10.30.41.68/ZHAP5_Srv052/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv052.log</a>
                             <a href="/download/10.30.41.67/ZHAP5_Srv061/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv061.log</a>
                             <a href="/download/10.30.41.67/ZHAP5_Srv062/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv062.log</a>
                             <a href="/download/10.30.41.66/ZHAP5_Srv071/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv071.log</a>
                         </div>
-                        <div>
+                        <div style="padding: 7px;">
                             <a href="/download/10.30.41.66/ZHAP5_Srv072/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv072.log</a>
                             <a href="/download/10.30.41.101/ZHAP5_Srv081/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv081.log</a>
                             <a href="/download/10.30.41.101/ZHAP5_Srv082/log" class="button button-small button-raised button-primary button-pill">ZHAP5_Srv082.log</a>
@@ -176,38 +186,38 @@
             <div class="panel panel-default" style="padding-top: 0; padding-bottom: 0;">
                 <div class="panel-heading" style="text-align: left;" role="tab" id="headingTwo">
                     <h4 class="panel-title">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="padding-top: 10px;">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="padding-top: 10px; font-size: small;">
                             标准输出日志
                         </a>
                     </h4>
                 </div>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                    <div class="panel-body">
-                        <div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" style="padding-bottom: 0px;">
+                    <div class="panel-body" style="font-size: 10px;">
+                        <div style="padding: 7px;">
                             <a href="/download/10.30.41.81/ZHAP5_Srv001/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv001.out</a>
                             <a href="/download/10.30.41.81/ZHAP5_Srv002/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv002.out</a>
                             <a href="/download/10.30.41.82/ZHAP5_Srv011/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv011.out</a>
                             <a href="/download/10.30.41.82/ZHAP5_Srv012/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv012.out</a>
                         </div>
-                        <div>
+                        <div style="padding: 7px;">
                             <a href="/download/10.30.41.79/ZHAP5_Srv021/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv021.out</a>
                             <a href="/download/10.30.41.79/ZHAP5_Srv022/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv022.out</a>
                             <a href="/download/10.30.41.78/ZHAP5_Srv031/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv031.out</a>
                             <a href="/download/10.30.41.78/ZHAP5_Srv032/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv032.out</a>
                         </div>
-                        <div>
+                        <div style="padding: 7px;">
                             <a href="/download/10.30.41.69/ZHAP5_Srv041/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv041.out</a>
                             <a href="/download/10.30.41.69/ZHAP5_Srv042/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv042.out</a>
                             <a href="/download/10.30.41.68/ZHAP5_Srv051/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv051.out</a>
                             <a href="/download/10.30.41.68/ZHAP5_Srv052/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv052.out</a>
                         </div>
-                        <div>
+                        <div style="padding: 7px;">
                             <a href="/download/10.30.41.67/ZHAP5_Srv061/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv061.out</a>
                             <a href="/download/10.30.41.67/ZHAP5_Srv062/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv062.out</a>
                             <a href="/download/10.30.41.66/ZHAP5_Srv071/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv071.out</a>
                             <a href="/download/10.30.41.66/ZHAP5_Srv072/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv072.out</a>
                         </div>
-                        <div>
+                        <div style="padding: 7px;">
                             <a href="/download/10.30.41.101/ZHAP5_Srv081/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv081.out</a>
                             <a href="/download/10.30.41.101/ZHAP5_Srv082/out" class="button button-small button-raised button-highlight button-pill">ZHAP5_Srv082.out</a>
                         </div>
@@ -218,38 +228,38 @@
             <div class="panel panel-default" style="padding-top: 0; padding-bottom: 0;">
                 <div class="panel-heading" style="text-align: left;" role="tab" id="headingThree">
                     <h4 class="panel-title">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="padding-top: 10px;">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="padding-top: 10px; font-size: small;">
                             GC日志
                         </a>
                     </h4>
                 </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                    <div class="panel-body">
-                        <div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" style="padding-bottom: 0px;">
+                    <div class="panel-body" style="font-size: 10px;">
+                        <div style="padding: 7px;">
                             <a href="/download/10.30.41.81/ZHAP5_Srv001/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv001.gc</a>
                             <a href="/download/10.30.41.81/ZHAP5_Srv002/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv002.gc</a>
                             <a href="/download/10.30.41.82/ZHAP5_Srv011/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv011.gc</a>
                             <a href="/download/10.30.41.82/ZHAP5_Srv012/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv012.gc</a>
                         </div>
-                        <div>
+                        <div style="padding: 7px;">
                             <a href="/download/10.30.41.79/ZHAP5_Srv021/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv021.gc</a>
                             <a href="/download/10.30.41.79/ZHAP5_Srv022/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv022.gc</a>
                             <a href="/download/10.30.41.78/ZHAP5_Srv031/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv031.gc</a>
                             <a href="/download/10.30.41.78/ZHAP5_Srv032/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv032.gc</a>
                         </div>
-                        <div>
+                        <div style="padding: 7px;">
                             <a href="/download/10.30.41.69/ZHAP5_Srv041/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv041.gc</a>
                             <a href="/download/10.30.41.69/ZHAP5_Srv042/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv042.gc</a>
                             <a href="/download/10.30.41.68/ZHAP5_Srv051/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv051.gc</a>
                             <a href="/download/10.30.41.68/ZHAP5_Srv052/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv052.gc</a>
                         </div>
-                        <div>
+                        <div style="padding: 7px;">
                             <a href="/download/10.30.41.67/ZHAP5_Srv061/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv061.gc</a>
                             <a href="/download/10.30.41.67/ZHAP5_Srv062/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv062.gc</a>
                             <a href="/download/10.30.41.66/ZHAP5_Srv071/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv071.gc</a>
                             <a href="/download/10.30.41.66/ZHAP5_Srv072/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv072.gc</a>
                         </div>
-                        <div>
+                        <div style="padding: 7px;">
                             <a href="/download/10.30.41.101/ZHAP5_Srv081/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv081.gc</a>
                             <a href="/download/10.30.41.101/ZHAP5_Srv082/gc" class="button button-small button-raised button-action button-pill">ZHAP5_Srv082.gc</a>
                         </div>
@@ -258,7 +268,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4" style="padding-top: 3%">
+    <div class="col-sm-4 col-md-4 col-lg-4" style="padding-top: 3%; padding-left: 0; padding-right: 0; font-size: small; width: 32%;">
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">Server状态巡检</h3>
@@ -283,14 +293,30 @@
     </div>
 </div>
 <div>
+
+    <div class="row" style="padding: 0">
+<!--        <div class="switch" style="text-align: center; padding: 0" data-on="success" data-off="warning">
+            <input type="checkbox" checked="checked" style="padding: 0"/>
+        </div> data-on-text="标准折线图" data-off-text="老赛专用图"  -->
+        <div class="switch">
+            <input id="switch" type="checkbox" checked="checked" data-on-text='标准折线' data-off-text='老赛专用' data-on-color="success" data-off-color="warning"/>
+        </div>
+    </div>
     <div id="zhap5" class="row col-sm-12 col-md-12 col-lg-12"></div>
 </div>
 
 <script type="text/javascript" th:src="@{/js/jquery.min.1.11.2.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap.min.3.3.0.js}"></script>
 <script type="text/javascript" th:src="@{/js/highcharts.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap-switch.js}"></script>
 <script type="text/javascript" th:src="@{/js/hr_cpuinfo_line.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery.dataTables.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/zhap5_jmx_polling.js}"></script>
+
+<script>
+    $(function(argument) {
+        $('[type="checkbox"]').bootstrapSwitch();
+    })
+</script>
 
 </body></html>

@@ -1,14 +1,11 @@
 package com.example;
 
-import com.example.utils.WlsJmxMonitorUtils;
-
-import java.util.Map;
-
 /**
  * Created by Xue on 01/22/17.
  */
 public class JvmRuntimeCheck {
 
+/*
     public static void main(String[] args) throws Exception {
 //        String hostname = "10.30.41.80";
         String hostname = "10.30.41.140";
@@ -21,6 +18,7 @@ public class JvmRuntimeCheck {
         long end = System.nanoTime();
         System.out.println("****** " + (end - start));
         map.forEach((k, v) -> System.out.println(k + " : " + v));
+
 
 /*
         Map<String, String> map = new HashMap<>();
@@ -35,5 +33,5 @@ public class JvmRuntimeCheck {
         }*/
 
     }
-}
+//}
 
