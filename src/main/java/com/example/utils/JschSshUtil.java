@@ -16,7 +16,7 @@ public class JschSshUtil {
 	private static Channel channel = null;
 	private static InputStream inputStream = null;
 	private static OutputStream outputStream = null;
-	public static String out = null;	
+	public static String out = null;
 
 	public static void sshConn(String ip, String username, String passwd, List<String> cmd) throws Exception {
 
@@ -42,17 +42,26 @@ public class JschSshUtil {
 				command += "\n";
 				outputStream.write(command.getBytes());
 				outputStream.flush();
-				Thread.sleep(500);
 
-				if (inputStream.available() > 0) {
-					byte[] data = new byte[inputStream.available()];
-					int nLen = inputStream.read(data);
+				boolean flag = true;
+				while (flag) {
+					Thread.sleep(500);
+					int count = inputStream.available();
+					int offset = 0;
+					if (count > 0) {
+						byte[] data = new byte[count];
+						int nLen = inputStream.read(data);
 
-					if (nLen < 0) {
-						throw new Exception("Network Error, Unable to Get InputStream ...");
+						if (nLen < 0) {
+							throw new Exception("Network Error, Unable to Get InputStream ...");
+						}
+						out = new String(data, offset, nLen - offset, "UTF-8");
+						offset = nLen - offset;
+						if (out.endsWith("# ") || out.endsWith("~ ")) {
+							flag = false;
+						}
+						System.out.println(out);
 					}
-					out = new String(data, 0, nLen, "UTF-8");
-					System.out.println(out);
 				}
 			}
 		} catch (Exception e) {
