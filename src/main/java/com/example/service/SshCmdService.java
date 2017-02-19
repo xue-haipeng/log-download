@@ -3,7 +3,9 @@ package com.example.service;
 import com.example.utils.JschSshUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -53,15 +55,18 @@ public class SshCmdService {
         this.cmd = cmd;
     }
 
+    @Autowired
+    SimpMessagingTemplate simpMessagingTemplate;
+
     public void sshService() {
         ips.forEach(ip -> {
             try {
-                JschSshUtil.sshConn(ip, username, passwd, cmd);
+                JschSshUtil.sshConn(ip, username, passwd, cmd, simpMessagingTemplate);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            out = JschSshUtil.out;
-            logger.info(out);
+/*            out = JschSshUtil.out;
+            logger.info(out);*/
             JschSshUtil.sshDisconn();
         });
     }

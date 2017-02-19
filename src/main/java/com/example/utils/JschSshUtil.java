@@ -1,8 +1,12 @@
 package com.example.utils;
 
+import com.example.domain.Response;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +14,7 @@ import java.io.OutputStream;
 import java.util.List;
 
 public class JschSshUtil {
+	private static final Logger logger = LoggerFactory.getLogger(JschSshUtil.class);
 	private static final int PORT = 22;
 	private static JSch jsch = null;
 	private static Session session = null;
@@ -18,7 +23,7 @@ public class JschSshUtil {
 	private static OutputStream outputStream = null;
 	public static String out = null;
 
-	public static void sshConn(String ip, String username, String passwd, List<String> cmd) throws Exception {
+	public static void sshConn(String ip, String username, String passwd, List<String> cmd, SimpMessagingTemplate simpMessagingTemplate) throws Exception {
 
 		jsch = new JSch();
 		session = jsch.getSession(username, ip, PORT);
@@ -29,7 +34,7 @@ public class JschSshUtil {
 
 		session.setPassword(passwd);
 		session.setConfig("StrictHostKeyChecking", "no");
-		session.connect(10000);
+		session.connect(5000);
 
 		try {
 			channel = (Channel) session.openChannel("shell");
@@ -44,9 +49,18 @@ public class JschSshUtil {
 				outputStream.flush();
 
 				boolean flag = true;
+				int count = 0;
+				int stuck = 0;
 				while (flag) {
-					Thread.sleep(500);
-					int count = inputStream.available();
+					Thread.sleep(200);
+					if (inputStream.available() == count) {
+						stuck += 1;
+					}
+					if (stuck > 50) {
+						logger.warn("*********  TIMEOUT  ***************");
+						break;
+					}
+					count = inputStream.available();
 					int offset = 0;
 					if (count > 0) {
 						byte[] data = new byte[count];
@@ -56,9 +70,13 @@ public class JschSshUtil {
 							throw new Exception("Network Error, Unable to Get InputStream ...");
 						}
 						out = new String(data, offset, nLen - offset, "UTF-8");
-						offset = nLen - offset;
 						if (out.endsWith("# ") || out.endsWith("~ ")) {
 							flag = false;
+						}
+						if (simpMessagingTemplate != null) {
+							simpMessagingTemplate.convertAndSend("/topic/output", new Response(
+									out.replaceAll(System.getProperty("line.separator"), "<br/>").replaceAll(" ", "&nbsp;")
+							.replaceAll("\t", "&emsp;").replaceAll("\u001B\\[[\\d;]*[^\\d;]","")));
 						}
 						System.out.println(out);
 					}

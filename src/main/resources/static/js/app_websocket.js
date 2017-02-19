@@ -33,7 +33,7 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/ws/hello", {}, JSON.stringify({'name': $("#name").val()}));
+    stompClient.send("/ws/hello", {}, JSON.stringify({'command': $("#cmd").val()}));
 }
 
 function showGreeting(message) {

@@ -4,20 +4,20 @@ package com.example.domain;
  * Created by Xue on 02/17/17.
  */
 public class HelloMessage {
-    private String name;
+    private String command;
 
     public HelloMessage() {
     }
 
-    public HelloMessage(String name) {
-        this.name = name;
+    public HelloMessage(String command) {
+        this.command = command;
     }
 
-    public String getName() {
-        return name;
+    public String getCommand() {
+        return command;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCommand(String command) {
+        this.command = command;
     }
 }

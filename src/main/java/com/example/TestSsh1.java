@@ -27,7 +27,7 @@ public class TestSsh1 {
     public static String sshService(List<String> cmd) {
         ips.forEach(ip -> {
             try {
-                JschSshUtil.sshConn(ip, username, passwd, cmd);
+                JschSshUtil.sshConn(ip, username, passwd, cmd, null);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -36,9 +36,12 @@ public class TestSsh1 {
         JschSshUtil.sshDisconn();
         return out;
     }
+/*
 
     public static void main(String[] args) {
         sshService(cmd);
+//        System.out.println(System.getProperty("line.separator"));
     }
+*/
 
 }
