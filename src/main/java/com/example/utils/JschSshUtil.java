@@ -70,7 +70,7 @@ public class JschSshUtil {
 							throw new Exception("Network Error, Unable to Get InputStream ...");
 						}
 						out = new String(data, offset, nLen - offset, "UTF-8");
-						if (out.endsWith("# ") || out.endsWith("~ ")) {
+						if (out.endsWith("]# ") || out.endsWith("]$ ")) {
 							flag = false;
 						}
 						if (simpMessagingTemplate != null) {

@@ -2,20 +2,20 @@
 spring:
     datasource:
         driver-class-name: oracle.jdbc.OracleDriver
-#        url: jdbc:oracle:thin:@10.30.49.76:1521/ORADB
-#        username: basis
-#        password: erpbasis0
-        url: jdbc:oracle:thin:@192.168.147.139:1521/xe
-        username: system
-        password: oracle
+        url: jdbc:oracle:thin:@10.30.49.76:1521/ORADB
+        username: basis
+        password: erpbasis0
+#        url: jdbc:oracle:thin:@192.168.147.139:1521/xe
+#        username: system
+#        password: oracle
     jpa:
         database-platform: org.hibernate.dialect.Oracle10gDialect
         show-sql: true
     rabbitmq:
-        host: 192.168.147.139
+        host: 11.11.47.72
         port: 5672
-        username: rabbit
-        password: rabbit
+        username: guest
+        password: guest
 # SFTP Info
 sftp:
     username: itmuser

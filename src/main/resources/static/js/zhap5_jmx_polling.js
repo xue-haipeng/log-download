@@ -4,7 +4,7 @@
 $(function() {
     $("#mserver").click(function() {
         $('#mserver_table').DataTable({
-            retrieve: true,
+            "destroy": true,
             "ajax": {
                 "url": "/zzkf/zhap5_server_data",
                 "dataSrc": ""
@@ -30,7 +30,7 @@ $(function() {
 
     $("#aserver").click(function() {
         $('#mserver_table').DataTable({
-            retrieve: true,
+            "destroy": true,
             "ajax": {
                 "url": "/zzkf/zhap5_domain_data",
                 "dataSrc": ""
