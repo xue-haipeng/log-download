@@ -31,6 +31,19 @@ sftp:
         10.30.41.67: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv06{}/logs/ZHAP5_Srv06{}.[]
         10.30.41.66: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv07{}/logs/ZHAP5_Srv07{}.[]
         10.30.41.101: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv08{}/logs/ZHAP5_Srv08{}.[]
+    xoaps:
+        10.30.41.129: /oracle/admin/XOAPS_DOMAIN/mserver/XOAPS_DOMAIN/servers/XOAPS_Srv00{}/logs/XOAPS_Srv00{}_yyyy_MM_dd_hh_mm.log
+        10.30.41.130: /oracle/admin/XOAPS_DOMAIN/mserver/XOAPS_DOMAIN/servers/XOAPS_Srv01{}/logs/XOAPS_Srv01{}_yyyy_MM_dd_hh_mm.log
+        10.30.41.131: /oracle/admin/XOAPS_DOMAIN/mserver/XOAPS_DOMAIN/servers/XOAPS_Srv02{}/logs/XOAPS_Srv02{}_yyyy_MM_dd_hh_mm.log
+        10.30.41.132: /oracle/admin/XOAPS_DOMAIN/mserver/XOAPS_DOMAIN/servers/XOAPS_Srv03{}/logs/XOAPS_Srv03{}_yyyy_MM_dd_hh_mm.log
+        10.30.41.133: /oracle/admin/XOAPS_DOMAIN/mserver/XOAPS_DOMAIN/servers/XOAPS_Srv04{}/logs/XOAPS_Srv04{}_yyyy_MM_dd_hh_mm.log
+        10.30.41.134: /oracle/admin/XOAPS_DOMAIN/mserver/XOAPS_DOMAIN/servers/XOAPS_Srv05{}/logs/XOAPS_Srv05{}_yyyy_MM_dd_hh_mm.log
+        10.30.41.136: /oracle/admin/XOAPS_DOMAIN/mserver/XOAPS_DOMAIN/servers/XOAPS_Srv06{}/logs/XOAPS_Srv06{}_yyyy_MM_dd_hh_mm.log
+        10.30.41.137: /oracle/admin/XOAPS_DOMAIN/mserver/XOAPS_DOMAIN/servers/XOAPS_Srv07{}/logs/XOAPS_Srv07{}_yyyy_MM_dd_hh_mm.log
+        10.30.41.138: /oracle/admin/XOAPS_DOMAIN/mserver/XOAPS_DOMAIN/servers/XOAPS_Srv08{}/logs/XOAPS_Srv08{}_yyyy_MM_dd_hh_mm.log
+        10.30.41.139: /oracle/admin/XOAPS_DOMAIN/mserver/XOAPS_DOMAIN/servers/XOAPS_Srv09{}/logs/XOAPS_Srv09{}_yyyy_MM_dd_hh_mm.log
+        10.30.41.141: /oracle/admin/XOAPS_DOMAIN/mserver/XOAPS_DOMAIN/servers/XOAPS_Srv10{}/logs/XOAPS_Srv10{}_yyyy_MM_dd_hh_mm.log
+        10.30.41.135: /oracle/admin/XOAPS_DOMAIN/mserver/XOAPS_DOMAIN/servers/XOAPS_Srv11{}/logs/XOAPS_Srv11{}_yyyy_MM_dd_hh_mm.log
 
 # Ssh Configuration
 ssh:

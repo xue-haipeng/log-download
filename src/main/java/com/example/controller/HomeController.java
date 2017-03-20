@@ -89,4 +89,27 @@ public class HomeController {
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .body(new InputStreamResource(file.getInputStream()));
     }
+
+    @RequestMapping(value = "/download/xoaps/{ip}/{logfile}", method = RequestMethod.GET)
+    public ResponseEntity<InputStreamResource> downloadXoapsLog(@PathVariable("ip") String ip, @PathVariable("logfile") String logfile)
+            throws IOException {
+//        invokeService.logFileDownload(ip, type, logfile.substring(logfile.length()-1));
+        invokeService.logFileDownloadXoaps(ip, logfile.substring(logfile.length()-1));
+        String filePath = "/oracle/logs/" + logfile + ".log";
+
+        FileSystemResource file = new FileSystemResource(filePath);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getFilename()));
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentLength(file.contentLength())
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .body(new InputStreamResource(file.getInputStream()));
+    }
+
 }
