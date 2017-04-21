@@ -3,8 +3,8 @@ spring:
     datasource:
         driver-class-name: oracle.jdbc.OracleDriver
         url: jdbc:oracle:thin:@10.30.49.76:1521/ORADB
-        username: basis
-        password: erpbasis0
+        username: ${DB_USERNAME}
+        password: ${DB_PASSWD}
 #        url: jdbc:oracle:thin:@192.168.147.139:1521/xe
 #        username: system
 #        password: oracle
@@ -18,8 +18,8 @@ spring:
         password: guest
 # SFTP Info
 sftp:
-    username: itmuser
-    passwd: itmuser
+    username: ${SSH_USERNAME}
+    passwd: ${SSH_PASSWD}
     logfiles:
         10.30.41.80: /oracle/admin/ZHAP5_DOMAIN/aserver/ZHAP5_DOMAIN/servers/AdminServer/logs/ZHAP5_DOMAI{}.[]
         10.30.41.81: /oracle/admin/ZHAP5_DOMAIN/mserver/ZHAP5_DOMAIN/servers/ZHAP5_Srv00{}/logs/ZHAP5_Srv00{}.[]
@@ -71,8 +71,8 @@ ssh:
         - 11.11.8.57
         - 11.11.8.58
         - 11.11.8.59
-    username: itmuser
-    passwd: itmuser
+    username: ${SSH_USERNAME}
+    passwd: ${SSH_PASSWD}
     cmd:
         - df -h
         - ifconfig
@@ -110,6 +110,6 @@ jmx:
         aserverPort:
             7001
         username:
-            checker
+            ${WLS_USERNAME}
         passwd:
-            erpbasis0
+            ${WLS_PASSWD}
