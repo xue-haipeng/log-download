@@ -53,9 +53,9 @@
 			<version>8.5.5</version>
 		</dependency>
 		<dependency>
-			<groupId>com.oracle</groupId>
+			<groupId>cn.easyproject</groupId>
 			<artifactId>ojdbc7</artifactId>
-			<version>12.1.0.2</version>
+			<version>12.1.0.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

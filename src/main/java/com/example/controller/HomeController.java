@@ -27,7 +27,7 @@ import java.util.*;
 @Controller
 public class HomeController {
 
-    private final String URL = "http://11.11.44.203:9200/logstash-date/_search?q=level:'Error'&q=message:'plate'";
+    private final String URL = "http://11.11.44.201:9200/logstash-date/_search?q=level:'Error'&q=message:'plate'";
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 
